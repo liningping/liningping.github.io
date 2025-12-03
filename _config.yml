@@ -1,5 +1,5 @@
 # Jekyll 配置
-theme: jekyll-theme-life-learning
+# 使用自定义布局，不依赖外部主题
 title: 林平的个人主页
 description: 林平的个人网站 - 很高兴你来到这里！
 
@@ -14,10 +14,11 @@ baseurl: ""
 # linkedin_username: your-linkedin-username
 # twitter_username: your-twitter-username
 
-# 插件
+# 插件（GitHub Pages 支持的插件）
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-seo-tag
 
 # 排除文件
 exclude:
