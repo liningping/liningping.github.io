@@ -1,3 +1,30 @@
-theme: life-learning
-title: lnp's homepage
-description: Bookmark this to keep an eye on my project updates!
+# Jekyll 配置
+theme: jekyll-theme-life-learning
+title: 林平的个人主页
+description: 林平的个人网站 - 很高兴你来到这里！
+
+# 网站信息
+lang: zh-CN
+timezone: Asia/Shanghai
+url: https://liningping.github.io
+baseurl: ""
+
+# 社交媒体（可选，填写后会在首页显示链接）
+# github_username: liningping
+# linkedin_username: your-linkedin-username
+# twitter_username: your-twitter-username
+
+# 插件
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# 排除文件
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git
+  - .gitignore
+  - README.md
