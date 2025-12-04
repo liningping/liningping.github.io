@@ -14,6 +14,14 @@ baseurl: ""
 # linkedin_username: your-linkedin-username
 # twitter_username: your-twitter-username
 
+# Markdown 配置（支持数学公式）
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+  math_engine_opts:
+    preview: false
+    preview_as_code: false
+
 # 插件（GitHub Pages 支持的插件）
 plugins:
   - jekyll-feed

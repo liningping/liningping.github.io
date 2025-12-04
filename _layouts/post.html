@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} - {{ site.title }}</title>
     <meta name="description" content="{{ page.description | default: page.excerpt | strip_html }}">
+    
+    <!-- MathJax 数学公式支持 -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          processEnvironments: true
+        },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+      };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -105,6 +123,16 @@
             background: none;
             padding: 0;
             color: inherit;
+        }
+
+        /* 数学公式样式 */
+        .post-content .MathJax {
+            font-size: 1.1em;
+        }
+
+        .post-content .MathJax_Display {
+            margin: 1.5em 0;
+            text-align: center;
         }
 
         @media (max-width: 768px) {
