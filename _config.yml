@@ -14,8 +14,16 @@ baseurl: ""
 # linkedin_username: your-linkedin-username
 # twitter_username: your-twitter-username
 
-# Permalink 配置
+# Permalink 配置（仅适用于文章）
 permalink: /:categories/:year/:month/:day/:title.html
+
+# 页面默认配置
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: null
 
 # Markdown 配置（支持数学公式）
 markdown: kramdown

@@ -1,6 +1,7 @@
 ---
 title: 博客
 permalink: /blog/
+layout: null
 ---
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: 'zh-CN' }}">
@@ -119,7 +120,7 @@ permalink: /blog/
 <body>
     <div class="container">
         <div class="header">
-            <a href="{{ '/' | relative_url }}" class="back-link">← 返回首页</a>
+            <a href="{% if site.baseurl %}{{ site.baseurl }}{% endif %}/" class="back-link">← 返回首页</a>
             <h1 class="page-title">📝 博客</h1>
         </div>
 
