@@ -209,9 +209,9 @@ header#banner {
 
   #header {
     @include desktop-container;
-    padding-top: 40px;
+    padding-top: 15px;
     position: relative;
-    height: 180px;
+    height: 80px;
     border-bottom: 1px solid $artsy-text;
 
     .header-navigation{
@@ -346,7 +346,7 @@ header#banner {
 
 #main {
   display: block;
-  margin-top: 40px;
+  margin-top: 10px;
 
   @media screen and (min-width: 800px) {
     @include desktop-container;
@@ -354,7 +354,7 @@ header#banner {
   @media screen and (max-width: 799px) {
     margin-top: 0;
     #content {
-      padding-top: 30px !important;
+      padding-top: 10px !important;
     }
   }
 
@@ -366,7 +366,7 @@ header#banner {
 
   #content {
     width: 100%;
-    padding-top: 50px;
+    padding-top: 10px;
     footer {
       clear: both;
     }
@@ -493,12 +493,16 @@ article {
 
   .article-container {
     @media screen and (min-width: 800px) {
-      margin-left: 250px;
+      margin-left: 0px;
       border-bottom: 1px solid $artsy-text;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
     }
 
     @media screen and (max-width: 799px) {
       margin-left: 0px;
+      padding: 0 20px;
     }
 
     li {
@@ -509,12 +513,16 @@ article {
 
   .article-container-single {
     @media screen and (min-width: 800px) {
-      margin-left: 250px;
+      margin-left: 0px;
       margin-bottom: 80px;
+      max-width: 1000px;
+      margin: 0 auto 80px;
+      padding: 0 40px;
     }
 
     @media screen and (max-width: 799px) {
       margin-left: 0px;
+      padding: 0 20px;
     }
 
     li {
@@ -526,10 +534,10 @@ article {
   .meta-container {
     @media screen and (min-width: 800px) {
       margin-top: 0px;
-      float: left;
-      width: 25%;
-      max-width: 180px;
-      padding-right: 50px;
+      float: none;
+      width: 100%;
+      max-width: 100%;
+      padding-right: 0px;
       min-height:34px;
     }
 
@@ -543,8 +551,8 @@ article {
 
   .content-container {
     @media screen and (min-width: 800px) {
-      float: left;
-      width: 68%;
+      float: none;
+      width: 100%;
     }
     @media screen and (max-width: 799px) {
       float: none;
@@ -590,8 +598,8 @@ article .article-container-single {
 
   @media screen and (min-width: 1200px) {
     .content-container {
-      width:68%;
-      margin-left:5%;
+      width:100%;
+      margin-left:0%;
     }
 
     .entry-content > figure {

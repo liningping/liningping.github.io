@@ -11,8 +11,22 @@
         {% else %}
           <h2 class="entry-title">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h2>
         {% endif %}
-        <time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date: "%b %-d, %Y" }}</time>
-          <p class="meta-author">{% include post/mini-author.html %}</p>
+        <time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date: "%Y年%-m月%-d日" }}</time>
+        <span class="meta-author">
+          {% if post.author %}
+            {% assign author_key = post.author %}
+          {% elsif page.author %}
+            {% assign author_key = page.author %}
+          {% else %}
+            {% assign author_key = site.author %}
+          {% endif %}
+          {% if author_key %}
+            {% assign author = site.authors[author_key] %}
+            {% if author %}
+              · {{ author.name }}
+            {% endif %}
+          {% endif %}
+        </span>
           </a>
       </header>
     </div>
@@ -22,7 +36,7 @@
     {% if index %}
     {% if post.content contains '<!-- more -->' %}
         {{ post.content | split:'<!-- more -->' | first }}
-        <p><a href="{{ post.url }}">Read on →</a></p>
+        <p><a href="{{ post.url }}">继续阅读 →</a></p>
     {% else %}
         {{ post.content }}
     {% endif %}
@@ -35,10 +49,10 @@
       {% include post/author.html %}
     </p>
     <p class="meta-categories">
-      Categories: {% include post/categories.html %}
+      分类：{% include post/categories.html %}
     </p>
     {% if page.series %}
-      <p class="meta-series" style="padding-bottom:0;">Part of a series: <strong>{{ page.series | series_link }}</strong></p>
+      <p class="meta-series" style="padding-bottom:0;">系列文章：<strong>{{ page.series | series_link }}</strong></p>
       <ul>
         {% for post in site.posts %}
         {% if post.series == page.series %}
@@ -52,7 +66,7 @@
     {% if site.disqus_short_name and page.comments == true %}
       <hr/>
       <section class="comments">
-        <h1>Comments</h1>
+        <h1>评论</h1>
         <div id="disqus_thread" aria-live="polite">{% include post/disqus_thread.html %}</div>
       </section>
       <hr/>
@@ -60,10 +74,10 @@
 
     <p class="meta-paginate">
       {% if page.previous.url %}
-        <a class="previous" href="{{page.previous.url}}" title="Previous Post: {{page.previous.title}}">&laquo; {{page.previous.title}}</a>
+        <a class="previous" href="{{page.previous.url}}" title="上一篇文章：{{page.previous.title}}">&laquo; {{page.previous.title}}</a>
       {% endif %}
       {% if page.next.url %}
-        <a class="next" href="{{page.next.url}}" title="next Post: {{page.next.title}}">{{page.next.title}} &raquo;</a>
+        <a class="next" href="{{page.next.url}}" title="下一篇文章：{{page.next.title}}">{{page.next.title}} &raquo;</a>
       {% endif %}
     </p>
   </div>

@@ -13,11 +13,7 @@ footer: false
       <a href="{{ author.site }}">Site</a>
     </span>
     {% endif %}
-    {% if author.github %}
-    <span class="fn">
-      <a href="https://github.com/{{ author.github }}">GitHub</a>
-    </span>
-    {% endif %}
+    {% comment %}GitHub 链接已移除，仅在导航栏显示{% endcomment %}
     {% if author.twitter %}
     <span class="fn">
       <a href="https://twitter.com/{{ author.twitter }}">@{{author.twitter}}</a>

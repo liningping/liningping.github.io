@@ -65,7 +65,7 @@
   // And http://donw.io/post/github-comments/
 
   var loadComments = function (data) {
-    writeToComment("h2", "Comments")
+    writeToComment("h2", "评论")
     for (var i = 0; i < data.length; i++) {
       var cuser = data[i].user.login
       var cuserlink = data[i].user.html_url
@@ -81,9 +81,9 @@
         "<a class='comment-username' href=\"" + cuserlink + '">' +
         '<img src="' + cavatarlink + '" alt="" width="40" height="40">' +
         cuser +
-        "</a>" + " commented " +
+        "</a>" + " 评论于 " +
         "<a class='comment-date' href=\"" + clink + '">' +
-        timeSince(cdate) + " ago" +
+        timeSince(cdate) + " 前" +
         "</a>" +
         "</div>" +
         "<div class='comment-body'>"
@@ -97,7 +97,7 @@
     var callToAction =
       "<hr/>" +
       "<p>" +
-      "Our comments are using GitHub Issues on the Artsy Blog repo. You can post by replying to <a href='https://github.com/artsy/artsy.github.io/issues/{{ page.comment_id }}'>issue #{{ page.comment_id }}</a>." +
+      "评论使用 GitHub Issues。你可以通过回复 <a href='https://github.com/artsy/artsy.github.io/issues/{{ page.comment_id }}'>issue #{{ page.comment_id }}</a> 来发表评论。" +
       "</p>"
     writeToComment("div", callToAction)
   }
@@ -106,7 +106,7 @@
     var callToAction =
       "<hr/>" +
       "<p>" +
-      "This post has no comments, yet, you could be the first. Our comments are using GitHub Issues on the Artsy Blog repo. You can post by replying to <a href='https://github.com/artsy/artsy.github.io/issues/{{ page.comment_id }}'>issue #{{ page.comment_id }}</a>." +
+      "这篇文章还没有评论，你可以成为第一个评论者。评论使用 GitHub Issues。你可以通过回复 <a href='https://github.com/artsy/artsy.github.io/issues/{{ page.comment_id }}'>issue #{{ page.comment_id }}</a> 来发表评论。" +
       "</p>"
     writeToComment("div", callToAction)
   }

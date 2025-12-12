@@ -11,8 +11,22 @@
         {% else %}
           <h2 class="entry-title">{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}</h2>
         {% endif %}
-        <time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date: "%b %-d, %Y" }}</time>
-          <p class="meta-author">{% include post/mini-author.html %}</p>
+        <time datetime="{{ page.date | date: "%Y-%m-%d" }}">{{ page.date | date: "%Y年%-m月%-d日" }}</time>
+        <span class="meta-author">
+          {% if post.author %}
+            {% assign author_key = post.author %}
+          {% elsif page.author %}
+            {% assign author_key = page.author %}
+          {% else %}
+            {% assign author_key = site.author %}
+          {% endif %}
+          {% if author_key %}
+            {% assign author = site.authors[author_key] %}
+            {% if author %}
+              · {{ author.name }}
+            {% endif %}
+          {% endif %}
+        </span>
           </a>
       </header>
     </div>
@@ -21,10 +35,11 @@
   <div class="content-container">
     {% if index %}
     {% if post.content contains '<!-- more -->' %}
-        {{ post.content | split:'<!-- more -->' | first }}
-        <p><a href="{{ post.url }}">Read on →</a></p>
+        {{ post.content | split:'<!-- more -->' | first | strip_html | truncate: 100 }}
+        <p><a href="{{ post.url }}">继续阅读 →</a></p>
     {% else %}
-        {{ post.content }}
+        {{ post.content | strip_html | truncate: 100 }}
+        <p><a href="{{ post.url }}">继续阅读 →</a></p>
     {% endif %}
 
     {% else %}

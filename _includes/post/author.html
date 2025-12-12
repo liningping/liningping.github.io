@@ -7,40 +7,22 @@
 {% endif %}
 
 {% if author_key %}
-
-
-<div class="meta">
-  Posted by
-
-{% for key in author_key %}
-  {% assign author = site.authors[key] %}
-
+  {% assign author = site.authors[author_key] %}
   {% if author %}
-    <span class="byline author vcard">
-
-      <div class="meta"><span class="fn"><a href="/author/{{key}}">
-        {{ author.name }}
-      </a></span></div>
-
-      {% if author.site %}
-      <span class="fn">
-        <a href="{{ author.site }}">Site</a>
+    <div class="meta">
+      发布者：<span class="byline author vcard">
+        <span class="fn">{{ author.name }}</span>
+        {% if author.site %}
+        <span class="fn">
+          <a href="{{ author.site }}">Site</a>
+        </span>
+        {% endif %}
+        {% if author.twitter %}
+        <span class="fn">
+          <a href="https://twitter.com/{{ author.twitter }}">@{{author.twitter}}</a>
+        </span>
+        {% endif %}
       </span>
-      {% endif %}
-      {% if author.github %}
-      <span class="fn">
-        <a href="https://github.com/{{ author.github }}">GitHub</a>
-      </span>
-      {% endif %}
-      {% if author.twitter %}
-      <span class="fn">
-        <a href="https://twitter.com/{{ author.twitter }}">@{{author.twitter}}</a>
-      </span>
-      {% endif %}
-    </span>
-
+    </div>
   {% endif %}
-</div>
-
-{% endfor %}
 {% endif %}

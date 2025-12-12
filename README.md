@@ -1,232 +1,216 @@
-[![Build Status](https://circleci.com/gh/artsy/artsy.github.io.svg?style=svg)](https://circleci.com/gh/artsy/artsy.github.io)
+# 个人博客
 
-The Artsy OSS page and the blog runs on top of a default jekyll install. If you
-would like an overview of jekyll, their [website rocks](http://jekyllrb.com/).
+这是一个基于 Jekyll 的个人博客系统。
 
-## Setup
+## 快速开始
 
+### 环境要求
+
+- Ruby 2.7.5 或更高版本
+- Bundler
+
+### 安装步骤
+
+1. 克隆项目后，安装依赖：
+
+```bash
+bundle install
 ```
-git clone git@github.com:artsy/artsy.github.io.git
-cd artsy.github.io
-bundle
+
+2. 初始化项目：
+
+```bash
 bundle exec rake bootstrap
+```
+
+3. 构建网站：
+
+```bash
 bundle exec rake build
 ```
 
-### Common issues ⚠️
+4. 本地运行（开发模式）：
 
-<details><summary>Issues installing `therubyracer` and/or `v8` dependencies</summary>
-Some combination of the following might help resolve issues with installing these dependencies:
-
-- make sure you have a ruby version that works (e.g. 2.7.5)
-- Installing `v8` via homebrew: `brew install v8`
-- Installing the `libv8` gem using a specific version and v8 flag:
-  `gem install libv8 -v '3.16.14.19' -- --with-system-v8`
-- Assigning configuration options, as in
-  [this comment](https://gist.github.com/fernandoaleman/868b64cd60ab2d51ab24e7bf384da1ca#gistcomment-3114668).
-
-</details>
-
-## License
-
-The code in this repository is released under the MIT license. The contents of
-the blog itself (ie: the contents of the `_posts` directory) are released
-under +[Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
-
-## Running the OSS Site / Blog locally
-
-Running `rake serve` will _not_ generate category pages. They take a _long_ time
-to generate. No one wants that when working on the site.
-
-```
-  bundle exec rake serve
+```bash
+bundle exec rake serve
 ```
 
-Categories are generated when the ENV var `PRODUCTION` = `"YES"`.
+访问 `http://localhost:4000` 查看你的博客。
 
-## Deploying
+## 如何添加新博客
 
-- Circle automatically deploys to GitHub Pages when new commits are pushed to
-  the `source` branch.
-- If you need to trigger a deploy locally, the `rake deploy` command is
-  available.
-- See the `Rakefile` for details on how builds/deploys are done.
-- Note that the `main` branch does not build on Circle, due to all deploy
-  commits being prefixed with `[skip ci]`.
+### 方法一：使用模板文件
 
-## Adding an Author
+1. 复制模板文件到 `_posts` 目录：
 
-Authors are key-value stored, so you will need to give yourself a key inside
-[\_config.yml](_config.yml) - for example:
-
-```yaml
-joey:
-  name: Joey Aghion
-  github: joeyAghion
-  twitter: joeyAghion
-  site: http://joey.aghion.com
+```bash
+cp Post-Templates/YYYY-MM-DD-regular-post.markdown _posts/2024-01-01-你的文章标题.md
 ```
 
-Everything but name is optional.
+2. 修改文件名：
+   - 文件名格式：`YYYY-MM-DD-文章标题.md` 或 `YYYY-MM-DD-文章标题.markdown`
+   - 日期格式：`2024-01-01`
+   - 标题使用英文或拼音，用连字符 `-` 分隔单词
 
-## Authoring an Article
-
-Note: we now have some templates to help get you started writing a blog post.
-Check out the [`Post-Templates` directory](Post-Templates).
-
-TLDR _To generate a new post, create a new file in the `_posts` directory. Be
-sure to add your name as the author of the post and include several categories
-to file the post under. Here is a sample header YAML:_
-
-Note: categories are aggregated from the individual posts, so adding one is as
-easy as adding it to your post!
+3. 编辑文件内容，修改 frontmatter（文件开头的 YAML 配置）：
 
 ```yaml
 ---
 layout: post
-title: "Responsive Layouts with CSS3"
-date: 2012-01-17 11:03
+title: "你的文章标题"
+date: 2024-01-01 12:00
 comments: true
-author: Matt McNierney
-github-url: https://www.github.com/mmcnierney14
-twitter-url: http://twitter.com/mmcnierney
-blog-url: http://mattmcnierney.wordpress.com
-categories: [Design, CSS, HTML5]
+categories: [分类1, 分类2]
+author: 你的作者ID  # 需要在 _config.yml 中配置
 ---
 ```
 
-More info can be found in the [Jekyll docs](http://jekyllrb.com/docs/posts/).
+4. 在 `---` 下方开始写你的博客内容，支持 Markdown 语法。
 
-When you have authored an article, `git add` and `git commit` it, then push to a
-named branch with `git push origin [branch]`, and create a pull request to the
-`source` branch, it will be deployed to the site by travis when merged.
+### 方法二：手动创建
 
-After you have authored an article, consider re-generating the related articles
-data, so that we can surface other articles related to the one you just added.
-See **Generating related articles** section below.
+1. 在 `_posts` 目录下创建一个新文件，文件名格式：`YYYY-MM-DD-文章标题.md`
 
-## Enabling Comments
-
-Comments for articles are managed with
-[Issues](https://github.com/artsy/artsy.github.io/issues) in this GitHub
-repository.
-
-#### [Create an issue](https://github.com/artsy/artsy.github.io/issues/new) for the article
-
-Quote the opening paragraph(s) of the post as the body of the issue, and name it
-something like "Comments: My Fantastic New Post".
-
-#### Add the `Comment Thread` label to the issue
-
-#### Attach the issue to your article
-
-Copy the created issue ID; add it to the frontmatter YAML of your post, as the
-`comment_id` attribute:
-
-`comment_id: 1234`
-
-## After Deploying an Article
-
-Every article on our blog needs one more thing: a snappy tweet! You can ask Ash
-or Orta to do this for you, but you're also welcome to log into the
-[@ArtsyOpenSource](https://twitter.com/ArtsyOpenSource) twitter account and
-tweet yourself (credentials are in the Engineering 1Password vault). Tweets
-usually follow the following format:
-
-```
-[pithy observation] [description of problem] [@ the article author's twitter handle]
-
-📝 [link to blog post]
-💻 [link to GitHub repo, if applicable]
-📷 [attach a screenshot of the first few paragraphs of the post]
-```
-
-We attach screenshots of the post because tweets with images get more traction.
-But! Images aren't accessible to screen readers, so make sure to use the
-twitter.com web interface and add a description to the image when posting:
-
-> Screenshot of the title and first two paragraphs of the linked-to blog post.
-
-You can look at previous tweets from our account to get a feel for these. If
-you'd like help, just ask in Slack.
-
-## Authoring a Podcast Episode
-
-To add a new episode of the podcast,
-[configure](https://github.com/aws/aws-sdk-ruby#configuration) your local AWS
-environment. The easiest is in environment variables stored in `~/.zshrc` or
-equivalent.
-
-```
-export AWS_ACCESS_KEY_ID=
-export AWS_SECRET_ACCESS_KEY=
-```
-
-After you have set up the environment, run the following rake task.
-
-```sh
-rake podcast:new_episode /path/to/local/mp3
-```
-
-This will add required YAML to `_config.yml`. You'll need to fill in some other
-fields manually; when finished it'll look like this:
+2. 在文件开头添加 frontmatter：
 
 ```yaml
-- title: Name of your episode
-  date: (generated by Rake task)
-  description: A paragraph-long description of the episode.
-  podcast_url: (generated by Rake task)
-  file_byte_length: (generated by Rake task)
-  duration: (generated by Rake task)
+---
+layout: post
+title: "你的文章标题"
+date: 2024-01-01 12:00
+comments: true
+categories: [分类1, 分类2]
+author: 你的作者ID
+---
 ```
 
-## Generating related articles
+3. 在 frontmatter 下方写你的博客内容。
 
-Generating the content for the "related articles" section at the bottom of an
-article is an offline & manual process that makes use of our staging vector
-database.
+### Frontmatter 字段说明
 
-Any developer can run this at any time and commit the resulting changes to
-`related-articles.json`.
+- `layout`: 固定为 `post`，表示这是博客文章
+- `title`: 文章标题（使用引号包裹）
+- `date`: 发布日期，格式：`YYYY-MM-DD HH:MM` 或 `YYYY-MM-DD`
+- `comments`: 是否启用评论，`true` 或 `false`
+- `categories`: 文章分类，数组格式，例如：`[技术, 前端, JavaScript]`
+- `author`: 作者ID，需要在 `_config.yml` 的 `authors` 部分配置
 
-There are a few simple prerequisite steps required for this task specifically:
+### 文章内容格式
 
-1. `gem install foreman`, if you haven't already.
+- 使用 Markdown 语法编写
+- 使用 `<!-- more -->` 标记摘要结束位置（摘要会显示在文章列表中）
+- 支持代码块、图片、链接等 Markdown 功能
 
-2. `cp .env.example .env`, if you haven't already.
+### 示例
 
-3. Connect to the staging VPN in order to access the staging instance of
-   Weaviate, our vector database.
+创建一个名为 `2024-01-15-my-first-post.md` 的文件：
 
-After that it is just:
+```yaml
+---
+layout: post
+title: "我的第一篇文章"
+date: 2024-01-15 10:00
+comments: true
+categories: [技术, 学习]
+author: yourname
+---
 
-```sh
-foreman run bundle exec rake related_articles
+这是文章的摘要部分，会显示在博客首页。
+
+<!-- more -->
+
+这里是文章的完整内容。
+
+## 二级标题
+
+可以写更多内容...
+
+- 列表项1
+- 列表项2
+
+### 代码示例
+
+```javascript
+console.log('Hello, World!');
+```
 ```
 
-## About Artsy
+## 配置作者信息
 
-<a href="https://www.artsy.net/">
-  <img align="left" src="https://avatars2.githubusercontent.com/u/546231?s=200&v=4"/>
-</a>
+在 `_config.yml` 文件的 `authors` 部分添加你的作者信息：
 
-This project is the work of engineers at [Artsy][footer_website], the world's
-leading and largest online art marketplace and platform for discovering art. One
-of our core [Engineering Principles][footer_principles] is being [Open Source by
-Default][footer_open] which means we strive to share as many details of our work
-as possible.
+```yaml
+authors:
+  yourname:
+    name: 你的名字
+    github: 你的GitHub用户名
+    twitter: 你的Twitter用户名（可选）
+    site: 你的个人网站（可选）
+```
 
-You can learn more about this work from [our blog][footer_blog] and by following
-[@ArtsyOpenSource][footer_twitter] or explore our public data by checking out
-[our API][footer_api]. If you're interested in a career at Artsy, read through
-our [job postings][footer_jobs]!
+然后在文章的 frontmatter 中使用 `author: yourname`。
 
-[footer_website]: https://www.artsy.net/
-[footer_principles]:
-  https://github.com/artsy/README/blob/master/culture/engineering-principles.md
-[footer_open]:
-  https://github.com/artsy/README/blob/master/culture/engineering-principles.md#open-source-by-default
-[footer_blog]: https://artsy.github.io/
-[footer_twitter]: https://twitter.com/ArtsyOpenSource
-[footer_api]: https://developers.artsy.net/
-[footer_jobs]: https://www.artsy.net/jobs
+## 分类说明
+
+- 分类会自动从文章中的 `categories` 字段生成
+- 不需要预先配置分类，直接在文章中添加即可
+- 建议使用统一的分类名称，便于管理
+
+## 本地预览
+
+在添加或修改文章后，运行：
+
+```bash
+bundle exec rake serve
+```
+
+然后访问 `http://localhost:4000` 查看效果。
+
+## 部署
+
+### GitHub Pages
+
+如果使用 GitHub Pages 部署：
+
+1. 将代码推送到 GitHub 仓库
+2. 在仓库设置中启用 GitHub Pages
+3. 选择 `source` 分支作为源分支（根据项目配置）
+
+### 其他部署方式
+
+可以构建静态文件后部署到任何静态网站托管服务：
+
+```bash
+bundle exec rake build
+```
+
+构建后的文件在 `_site` 目录中。
+
+## 常见问题
+
+### 文章不显示？
+
+- 检查文件名格式是否正确（`YYYY-MM-DD-标题.md`）
+- 检查 frontmatter 格式是否正确（YAML 语法）
+- 确保文件在 `_posts` 目录下
+
+### 分类页面不生成？
+
+分类页面在开发模式下不会自动生成（因为生成时间较长）。在生产环境（`PRODUCTION=YES`）下会自动生成。
+
+### 图片如何添加？
+
+将图片放在 `images` 目录下，然后在 Markdown 中使用：
+
+```markdown
+![图片描述](/images/your-image.png)
+```
+
+## 更多资源
+
+- [Jekyll 官方文档](https://jekyllrb.com/)
+- [Markdown 语法指南](https://www.markdownguide.org/)
+
+## 许可证
+
+本项目代码采用 MIT 许可证。
