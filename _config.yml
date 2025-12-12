@@ -1,7 +1,7 @@
 # 网站基本信息
-url: https://yourusername.github.io  # 修改为你的 GitHub Pages 地址
+url: https://liningping.github.io  # 修改为你的 GitHub Pages 地址
 title: 云之巅
-subtitle: 云之巅博客
+subtitle: kaleidoblog
 # google_analytics_tracking_id: UA-XXXXX-X  # 如果需要 Google Analytics，取消注释并填写
 permalink: /blog/:year/:month/:day/:title/
 baseurl: "" # the subpath of your site, e.g. /blog/
