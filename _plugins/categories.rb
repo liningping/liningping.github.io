@@ -10,6 +10,14 @@ module Jekyll
 
     def generate(site)
       if site.layouts.key? 'category_index'
+        # 检查是否是生产环境：GitHub Pages 或设置了 PRODUCTION=YES
+        # GitHub Pages 会设置 JEKYLL_ENV=production
+        is_production = ENV["JEKYLL_ENV"] == "production" || ENV["PRODUCTION"] == "YES"
+        
+        # 只在生产环境下生成分类页面（开发模式下生成时间较长）
+        # 但如果是在 GitHub Pages 上，总是生成
+        return unless is_production
+        
         dir = site.config['category_dir'] || 'categories'
         categories = []
         site.categories.each do |category, posts|
